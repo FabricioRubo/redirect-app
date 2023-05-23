@@ -83,7 +83,7 @@ const InputForm: NextPage<Props> = (props) => {
     const buttonSelectEditor = () => {
         if(questionObj[currentQuestion].isSelect) {
             return questionObj[currentQuestion].choices.map((choiceText:string) => {
-                return (<button onClick={e=> buttonSubmitAnswer(choiceText)} className="bg-transparent hover:bg-[#D9402B] text-[#D9402B] font-sans font-bold hover:text-white py-2 px-4 border border-[#D9402B] hover:border-transparent rounded w-1/2">{choiceText}</button>)
+                return (<button key={choiceText} onClick={e=> buttonSubmitAnswer(choiceText)} className="bg-transparent hover:bg-[#D9402B] text-[#D9402B] font-sans font-bold hover:text-white py-2 px-4 border border-[#D9402B] hover:border-transparent rounded w-1/2">{choiceText}</button>)
             })
         } else {
             return (
