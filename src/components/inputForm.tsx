@@ -1,7 +1,7 @@
 'use client'
 import { NextPage } from "next";
 import React,{ useRef, useState } from 'react'
-import { QuestionForm} from "@/interfaces";
+import { QuestionForm} from "@/types/interfaces";
 import validator from 'validator';
 
 

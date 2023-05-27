@@ -6,3 +6,8 @@ export interface QuestionForm {
     isSelect: boolean;
     choices: string[];
 }
+
+export interface EmailFormData {
+    formField1: string;
+    formField2: string;
+  }

@@ -1,4 +1,4 @@
-import { QuestionForm } from "@/interfaces"
+import { QuestionForm } from "@/types/interfaces"
 
 export const questions: QuestionForm[] = [
     {

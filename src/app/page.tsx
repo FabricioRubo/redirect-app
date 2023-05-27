@@ -34,7 +34,7 @@ const Home = () => {
   }
 
   const renderCompletion = () => {
-    if(completedInput) {
+    if(!completedInput) {
       return (
         <ConclusionForm  questionObj={questions} answers={answers}/>
       )
@@ -51,7 +51,7 @@ const Home = () => {
           </div>   
         </div>
         <div className="shadow-2xl flex justify-center items-center basis-3/5 bg-[#F9DA9C] h-full">
-          {renderInput()}
+          {/* {renderInput()} */}
           {renderCompletion()}
           <div hidden onClick={e=> printAll()}>Teste</div>
         </div>
