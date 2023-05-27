@@ -47,7 +47,7 @@ const Home = () => {
         <div className="flex justify-center items-center basis-2/5 bg-[#45a3a8a9] h-full">
           <div className="grid grid-rows-5 items-center">
             <Image className="row-span-3" src={logo} alt="TXAI Digital" height = {330} width={250}/>
-            <p className="font-mono row-span-2 text-center">TXAI Digital</p>
+            <p className="font-montserrat row-span-2 text-center">TXAI Digital</p>
           </div>   
         </div>
         <div className="shadow-2xl flex justify-center items-center basis-3/5 bg-[#F9DA9C] h-full">

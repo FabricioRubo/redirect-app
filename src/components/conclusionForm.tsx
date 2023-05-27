@@ -7,6 +7,11 @@ interface Props {
 }
 
 const ConclusionForm: NextPage<Props> = (props) => {
+
+    const mailSender = () => {
+        
+    }
+
     const {questionObj, answers} = props
     return (
         <div>

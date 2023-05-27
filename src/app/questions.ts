@@ -3,6 +3,7 @@ import { QuestionForm } from "@/interfaces"
 export const questions: QuestionForm[] = [
     {
         quest: "Queremos te conhecer melhor. Qual é o seu nome?",
+        description: "",
         placeHolder: "Digite seu nome",
         type: "text",
         isSelect: false,
@@ -10,6 +11,7 @@ export const questions: QuestionForm[] = [
     },
     {
         quest: "essa consultoria é exclusiva para profissionais liberais/autônomos e donos de empresa. Você é dono?",
+        description: "",
         placeHolder: "",
         type: '',
         isSelect: true,
@@ -17,20 +19,23 @@ export const questions: QuestionForm[] = [
     },
     {
         quest: "🔥 Perfeito! Qual é seu melhor email?",
+        description: "",
         placeHolder: "Digite seu e-mail",
-        type: "text",
+        type: "email",
         isSelect: false,
         choices: []
     },
     {
         quest: "Qual é o seu número de telefone? (Com Whatsapp)",
+        description: "",
         placeHolder: "51 98765-4321",
-        type: "text",
+        type: "telefone",
         isSelect: false,
         choices: []
     },
     {
         quest: "Qual é o Instagram da sua empresa? Caso não lembre, insira o nome.",
+        description: "Para efetuarmos a análise da jornada de compra do seu cliente, precisamos do link do seu Instagram",
         placeHolder: "Ex.: instagram.com/exemplo",
         type: "text",
         isSelect: false,
@@ -38,20 +43,23 @@ export const questions: QuestionForm[] = [
     },
     {
         quest: "Sua empresa possui site? Se sim, digite o site da sua empresa.",
-        placeHolder: "Vamos analisar o seu site com nossas ferramentas ultra modernas para identificar como podemos melhorar o seu posicionamento.",
+        description: "Vamos analisar o seu site com nossas ferramentas ultra modernas para identificar como podemos melhorar o seu posicionamento.",
+        placeHolder: "www.site.com",
         type: "text",
         isSelect: false,
         choices: []
     },
     {
         quest: "O que você ou a sua empresa vende?",
-        placeHolder: "Pode dar detalhes sobre sua operação se quiser. Assim vamos te ajudar ainda mais!",
+        description: "Pode dar detalhes sobre sua operação se quiser. Assim vamos te ajudar ainda mais!",
+        placeHolder: "Conte-nos!",
         type: "text",
         isSelect: false,
         choices: []
     },
     {
         quest: "Qual o seu faturamento atual?",
+        description: "",
         placeHolder: "",
         type: "",
         isSelect: true,
@@ -59,6 +67,7 @@ export const questions: QuestionForm[] = [
     },
     {
         quest: "Quanto você tem reservado para investir em anúncios?",
+        description: "",
         placeHolder: "",
         type: "",
         isSelect: true,
@@ -66,6 +75,7 @@ export const questions: QuestionForm[] = [
     },
     {
         quest: "Qual das opções abaixo melhor descreve o seu momento atual?",
+        description: "",
         placeHolder: "",
         type: "",
         isSelect: true,
@@ -73,6 +83,7 @@ export const questions: QuestionForm[] = [
     },
     {
         quest: "Qual tipo de serviço você procura?",
+        description: "",
         placeHolder: "",
         type: "",
         isSelect: true,

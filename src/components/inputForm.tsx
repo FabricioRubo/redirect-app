@@ -2,6 +2,7 @@
 import { NextPage } from "next";
 import React,{ useRef, useState } from 'react'
 import { QuestionForm} from "@/interfaces";
+import validator from 'validator';
 
 
 interface Props {
@@ -31,13 +32,41 @@ const InputForm: NextPage<Props> = (props) => {
             </div>
         );
     };
-    
+
+    const formatPhoneNumber = (phoneNumber: string) => {
+        // Remove all non-digit characters from the input
+        const cleaned = phoneNumber.replace(/\D/g, '');
+        
+        // Check if the cleaned input is a valid phone number
+        if (cleaned.length === 11) {
+            // Format the phone number as (xx) xxxxx-xxxx
+            const formatted = `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7)}`;
+            return formatted;
+        }
+        
+        // Return the original input if it's not a valid phone number
+        return phoneNumber;
+    };
 
     const inputChange = (value: string) => {
-        if (!value) {
-            setEmptyInputFlag(true)
+        if (questionObj[currentQuestion].type == "email") {
+            if (validator.isEmail(value)) {
+                setEmptyInputFlag(false);
+            } else {
+                setEmptyInputFlag(true);
+            }
+        // } else if(questionObj[currentQuestion].type == "telefone") {
+        //     if (!value) {
+        //         setEmptyInputFlag(true)
+        //     } else {
+        //         setEmptyInputFlag(false)
+        //     }
         } else {
-            setEmptyInputFlag(false)
+            if (!value) {
+                setEmptyInputFlag(true)
+            } else {
+                setEmptyInputFlag(false)
+            }
         }
         setInputText(value);
     }
@@ -51,6 +80,7 @@ const InputForm: NextPage<Props> = (props) => {
         updateAnswers(value);
         if (ref.current !==null) {
             ref.current.value = '';
+            setEmptyInputFlag(true)
         }
         if((indexChecker)==(questionObj.length)) {
             completionSignal(true)
@@ -63,19 +93,25 @@ const InputForm: NextPage<Props> = (props) => {
             return ((currentQuestion+1) + ". " + questionObj[currentQuestion].quest);
         }
     }
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter' && !emptyInput) {
+            buttonSubmitAnswer(inputText)
+        }
+    }
     const inputRenderer = () => {
         if (!questionObj[currentQuestion].isSelect) {
             return (
-                <input className="w-full font-sans text-2xl bg-transparent border-b-2 border-[#D9402B] leading-tight focus:outline-none placeholder-[#5d202547]" 
+                <input className="w-full font-montserrat text-2xl bg-transparent border-b-2 border-[#D9402B] leading-tight focus:outline-none placeholder-[#5d202547]" 
                 ref={ref}
                 placeholder={questionObj[currentQuestion].placeHolder  || "missing_text"} 
                 type={questionObj[currentQuestion].type || "missing_text"} 
                 onChange={e=>inputChange(e.target.value)}
+                onKeyDown={e => handleKeyDown(e)}
                 />
             );
         } else {
             return (
-                <div className="w-full bg-transparent border-b-2 border-[#D9402B]">
+                <div>
                 </div>
             )
         }
@@ -83,22 +119,32 @@ const InputForm: NextPage<Props> = (props) => {
     const buttonSelectEditor = () => {
         if(questionObj[currentQuestion].isSelect) {
             return questionObj[currentQuestion].choices.map((choiceText:string) => {
-                return (<button key={choiceText} onClick={e=> buttonSubmitAnswer(choiceText)} className="bg-transparent hover:bg-[#D9402B] text-[#D9402B] font-sans font-bold hover:text-white py-2 px-4 border border-[#D9402B] hover:border-transparent rounded w-1/2">{choiceText}</button>)
+                return (<button key={choiceText} onClick={e=> buttonSubmitAnswer(choiceText)} className="bg-transparent hover:bg-[#D9402B] text-[#D9402B] font-montserrat font-bold hover:text-white py-2 px-4 border border-[#D9402B] hover:border-transparent rounded w-1/2">{choiceText}</button>)
             })
         } else {
             return (
                 <button 
                     disabled={emptyInput} 
                     onClick={e=> buttonSubmitAnswer(inputText)} 
-                    className={"bg-transparent text-[#D9402B] font-sans font-bold py-2 px-4 border border-[#D9402B] rounded w-min " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")}>
+                    className={"bg-transparent text-[#D9402B] font-montserrat font-bold py-2 px-4 border border-[#D9402B] rounded w-min " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")}>
                         Próximo
                 </button>
             );
         }
     }
+    const descriptionEditor = () => {
+        if (questionObj[currentQuestion].description) {
+            return (
+                <div className="w-full bg-transparent">
+                    <p className="font-montserrat text-base font-bold text-[#d93f2ba4]">{questionObj[currentQuestion].description}</p>
+                </div>
+            )
+        }
+    }
     return (
         <div id="input-container" className="w-8/12">
-            <div className="font-mono text-2xl text-[#D9402B]">{questionEditor()}</div>
+            <div className="font-montserrat text-2xl text-[#D9402B]">{questionEditor()}</div>
+            {descriptionEditor()}
             {inputRenderer()}
             <div className="flex flex-col mt-6">
                 {buttonSelectEditor()}
