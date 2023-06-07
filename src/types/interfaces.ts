@@ -8,6 +8,6 @@ export interface QuestionForm {
 }
 
 export interface EmailFormData {
-    formField1: string;
-    formField2: string;
+    questions: QuestionForm[];
+    answers: string[];
   }

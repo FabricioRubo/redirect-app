@@ -10,6 +10,8 @@ interface Props {
 const ConclusionForm: NextPage<Props> = (props) => {
     const {questionObj, answers} = props
     const [isSending, setIsSending] = useState(true);
+
+
     
     useEffect(() => {
         sendEmail()
@@ -23,8 +25,8 @@ const ConclusionForm: NextPage<Props> = (props) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    formField1: 'Value 1',
-                    formField2: 'Value 2',
+                    questions: questionObj,
+                    answers: answers,
                 } as EmailFormData),
             });
             if (response.ok) {
@@ -53,7 +55,7 @@ const ConclusionForm: NextPage<Props> = (props) => {
         }
         return (
                 <div>
-                    <div className="font-montserrat text-2xl text-[#D9402B]">Seu Email foi enviado com sucesso!</div>
+                    <div className="font-montserrat text-2xl text-[#D9402B]">Seu e-mail foi enviado com sucesso!</div>
                 </div>
         )
     }
