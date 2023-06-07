@@ -2,7 +2,7 @@ import { QuestionForm } from "@/types/interfaces"
 
 export const questions: QuestionForm[] = [
     {
-        quest: "Queremos te conhecer melhor. Qual é o seu nome?",
+        quest: "Queremos te conhecer melhor! Qual é o seu nome?",
         description: "",
         placeHolder: "Digite seu nome",
         type: "text",
@@ -10,7 +10,7 @@ export const questions: QuestionForm[] = [
         choices: []
     },
     {
-        quest: "essa consultoria é exclusiva para profissionais liberais/autônomos e donos de empresa. Você é dono?",
+        quest: "essa consultoria é exclusiva para profissionais liberais, autônomos e donos de empresa. Você é dono?",
         description: "",
         placeHolder: "",
         type: '',
@@ -28,7 +28,7 @@ export const questions: QuestionForm[] = [
     {
         quest: "Qual é o seu número de telefone? (Com Whatsapp)",
         description: "",
-        placeHolder: "51 98765-4321",
+        placeHolder: "ex. 51 98765-4321",
         type: "telefone",
         isSelect: false,
         choices: []

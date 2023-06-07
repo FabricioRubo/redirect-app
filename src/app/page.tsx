@@ -41,17 +41,19 @@ const Home = () => {
   const responsiveClassEditor = () => {
     if (windowWidth < 768) {
       return {
+        isMobile: true,
         div0: 'h-screen',
-        div1: 'flex items-center justify-center bg-[#45a3a8a9] h-1/6 p-4',
+        div1: 'flex items-center justify-center bg-[#45a3a8a9] h-1/6',
         div2: 'grid items-center',
-        div3: 'col-span-1 flex items-center', // Add justify-center class
+        div3: 'col-span-1 flex items-center', 
         div4: 'font-montserrat text-center text-2xl text-[#5D2025] ml-4',
-        div5: 'shadow-2xl flex justify-center items-center bg-[#F9DA9C] h-5/6 p-4',
-        imageHeight: 60,
-        imageWidth: 44,
+        div5: 'shadow-2xl flex justify-center items-center bg-[#F9DA9C] h-5/6',
+        imageHeight: 90,
+        imageWidth: 66,
       };
     } else {
       return {
+        isMobile: false,
         div0: 'flex flex-row h-screen',
         div1: 'flex justify-center items-center basis-2/5 bg-[#45a3a8a9] h-full',
         div2: 'grid grid-rows-5 items-center',
@@ -64,17 +66,17 @@ const Home = () => {
     }
   };
 
-  const { div0, div1, div2, div3, div4, div5, imageHeight, imageWidth } = responsiveClassEditor();
+  const { isMobile, div0, div1, div2, div3, div4, div5, imageHeight, imageWidth } = responsiveClassEditor();
 
   const renderInput = () => {
     if (!completedInput) {
-      return <InputForm questionObj={questions} updateAnswers={updateAnswers} completionSignal={inputCompletedFunc} />;
+      return <InputForm isMobileFlag={isMobile} questionObj={questions} updateAnswers={updateAnswers} completionSignal={inputCompletedFunc} />;
     }
   };
 
   const renderCompletion = () => {
     if (completedInput) {
-      return <ConclusionForm questionObj={questions} answers={answers} />;
+      return <ConclusionForm isMobileFlag={isMobile} questionObj={questions} answers={answers} />;
     }
   };
 
@@ -84,10 +86,10 @@ const Home = () => {
         <div id='c' className={div1}>
           <div id='d' className={div2}>
             <div id='e' className={div3}>
-              {typeof window !== 'undefined' && ( // Only render Image on the client-side
+              {typeof window !== 'undefined' && (
                 <Image src={logo} alt='TXAI Digital' height={imageHeight} width={imageWidth} />
               )}
-              <p hidden={windowWidth < 768} className={div4}>Consultoria</p>
+              <p hidden={isMobile} className={div4}>Consultoria</p>
             </div>
           </div>
         </div>

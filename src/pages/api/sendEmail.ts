@@ -28,7 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const mailOptions = {
     from: process.env.MAIL_AUTH_SENDER,
-    to: process.env.MAIL_AUTH_RECIPIENTS,
+    // to: process.env.MAIL_AUTH_RECIPIENTS,
+    to: "fabriciorm40@outlook.com",
     subject: 'TESTE - Lead nova chegando!',
     html: `
       <html>

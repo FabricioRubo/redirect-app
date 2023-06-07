@@ -9,10 +9,11 @@ interface Props {
     questionObj: QuestionForm[];
     updateAnswers: (newAnswer: string) => void;
     completionSignal: (completionFlag: boolean) => void;
+    isMobileFlag: boolean;
 }
 
 const InputForm: NextPage<Props> = (props) => {
-    const {questionObj, updateAnswers, completionSignal} = props;
+    const {questionObj, isMobileFlag, updateAnswers, completionSignal} = props;
 
     let trashValue:string[]=[];
     let ref = useRef<HTMLInputElement>(null);
@@ -23,8 +24,11 @@ const InputForm: NextPage<Props> = (props) => {
     const [emptyInput, setEmptyInputFlag] = useState(true)
 
     const ProgressBar = ( progressPercentage:number) => {
+        const progressBarClass = () => {
+            return isMobileFlag ? 'mt-6 h-5 w-full bg-[#F19552]' : 'mt-6 h-5 w-1/2 bg-[#F19552]'
+        }
         return (
-            <div className='mt-6 h-5 w-1/2 bg-[#F19552]'>
+            <div className={progressBarClass()}>
                 <div
                     style={{ width: `${progressPercentage}%`}}
                     className={`h-full ${progressPercentage < 50 ? 'bg-[#D9402B]' : 'bg-[#45A3A8]'}`}>
@@ -87,11 +91,21 @@ const InputForm: NextPage<Props> = (props) => {
         }
     }
     const questionEditor = () => {
-        if (currentQuestion == 1) {
-            return ((currentQuestion+1) + ". " + answers[0] +", " + questionObj[currentQuestion].quest);
-        } else {
-            return ((currentQuestion+1) + ". " + questionObj[currentQuestion].quest);
+        const questionEditorClass = () => {
+            return isMobileFlag ? "font-montserrat text-xl text-[#D9402B] text-justify" : "font-montserrat text-2xl text-[#D9402B] text-justify"
         }
+        return currentQuestion == 1 ? 
+                (
+                    <div className={questionEditorClass()}>
+                        {(currentQuestion+1) + ". " + answers[0] +", " + questionObj[currentQuestion].quest};
+                    </div>
+                ) 
+                :
+                (
+                    <div className={questionEditorClass()}>
+                        {(currentQuestion+1) + ". " + questionObj[currentQuestion].quest}
+                    </div>
+                )
     }
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter' && !emptyInput) {
@@ -99,34 +113,45 @@ const InputForm: NextPage<Props> = (props) => {
         }
     }
     const inputRenderer = () => {
-        if (!questionObj[currentQuestion].isSelect) {
-            return (
-                <input className="w-full font-montserrat text-2xl bg-transparent border-b-2 border-[#D9402B] leading-tight focus:outline-none placeholder-[#5d202547]" 
-                ref={ref}
-                placeholder={questionObj[currentQuestion].placeHolder  || "missing_text"} 
-                type={questionObj[currentQuestion].type || "missing_text"} 
-                onChange={e=>inputChange(e.target.value)}
-                onKeyDown={e => handleKeyDown(e)}
-                />
-            );
-        } else {
-            return (
-                <div>
-                </div>
-            )
+        const inputRendererClass = () => {
+            return isMobileFlag ? 
+            "w-full pt-2 font-medium font-montserrat text-xl bg-transparent border-b-2 border-[#D9402B] text-[#000000c0] leading-tight focus:outline-none placeholder-[#5d202547]" 
+            : 
+            "w-full pt-1 font-montserrat text-2xl bg-transparent border-b-2 border-[#D9402B] text-[#000000c0] leading-tight focus:outline-none placeholder-[#5d202547]" 
         }
+        return questionObj[currentQuestion].isSelect ? (<></>) : (
+            <input className={inputRendererClass()} 
+            ref={ref}
+            placeholder={questionObj[currentQuestion].placeHolder  || "missing_text"} 
+            type={questionObj[currentQuestion].type || "missing_text"} 
+            onChange={e=>inputChange(e.target.value)}
+            onKeyDown={e => handleKeyDown(e)}
+            />
+        )
     }
     const buttonSelectEditor = () => {
+        const buttonSelectEditorClass = () => {
+            return isMobileFlag? 
+            "bg-transparent hover:bg-[#D9402B] text-sm text-[#D9402B] font-montserrat font-bold hover:text-white my-1 py-2 px-2 border border-[#D9402B] hover:border-transparent rounded w-full"
+            :
+            "bg-transparent hover:bg-[#D9402B] text-lg text-[#D9402B] font-montserrat font-bold hover:text-white my-1 py-3 px-2 border border-[#D9402B] hover:border-transparent rounded w-1/2"
+        }
+        const buttonEditorClass = () => {
+            return isMobileFlag? 
+            "bg-transparent text-[#D9402B] font-montserrat font-bold my-1 py-2 px-2 border border-[#D9402B] rounded w-full " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")
+            :
+            "bg-transparent text-[#D9402B] font-montserrat font-bold my-1 py-2 px-2 border border-[#D9402B] rounded w-1/2 " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")
+        }
         if(questionObj[currentQuestion].isSelect) {
             return questionObj[currentQuestion].choices.map((choiceText:string) => {
-                return (<button key={choiceText} onClick={e=> buttonSubmitAnswer(choiceText)} className="bg-transparent hover:bg-[#D9402B] text-[#D9402B] font-montserrat font-bold hover:text-white py-2 px-4 border border-[#D9402B] hover:border-transparent rounded w-1/2">{choiceText}</button>)
+                return (<button key={choiceText} onClick={e=> buttonSubmitAnswer(choiceText)} className={buttonSelectEditorClass()}>{choiceText}</button>)
             })
         } else {
             return (
                 <button 
                     disabled={emptyInput} 
                     onClick={e=> buttonSubmitAnswer(inputText)} 
-                    className={"bg-transparent text-[#D9402B] font-montserrat font-bold py-2 px-4 border border-[#D9402B] rounded w-min " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")}>
+                    className={buttonEditorClass()}>
                         Próximo
                 </button>
             );
@@ -142,8 +167,8 @@ const InputForm: NextPage<Props> = (props) => {
         }
     }
     return (
-        <div id="input-container" className="w-8/12">
-            <div className="font-montserrat text-2xl text-[#D9402B]">{questionEditor()}</div>
+        <div id="input-container" className="w-9/12">
+            {questionEditor()}
             {descriptionEditor()}
             {inputRenderer()}
             <div className="flex flex-col mt-6">
