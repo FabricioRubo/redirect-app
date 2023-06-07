@@ -14,21 +14,21 @@ const Home = () => {
   const [answers, setAnswers] = useState(trashValue);
   const [completedInput, setCompletion] = useState(false);
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState((0));
 
   useEffect(() => {
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      setWindowWidth(window?.innerWidth);
     };
+
     if (typeof window !== 'undefined') {
-      setWindowWidth(window.innerWidth);
-      window.addEventListener('resize', handleResize);
+      setWindowWidth(window?.innerWidth);
+      window?.addEventListener('resize', handleResize);
+
+      return () => {
+        window?.removeEventListener('resize', handleResize);
+      };
     }
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('resize', handleResize);
-      }
-    };
   }, []);
 
   const updateAnswers = (newAnswer:string) => {
@@ -44,7 +44,7 @@ const Home = () => {
       return {
         div0: 'h-screen',
         div1: 'flex items-center justify-center bg-[#45a3a8a9] h-1/6 p-4',
-        div2: 'grid grid-cols-2 items-center',
+        div2: 'grid items-center',
         div3: 'col-span-1 flex items-center', // Add justify-center class
         div4: 'font-montserrat text-center text-2xl text-[#5D2025] ml-4',
         div5: 'shadow-2xl flex justify-center items-center bg-[#F9DA9C] h-5/6 p-4',
@@ -85,7 +85,9 @@ const Home = () => {
         <div id='c' className={div1}>
           <div id='d' className={div2}>
             <div id='e' className={div3}>
-              <Image src={logo} alt="TXAI Digital" height={imageHeight} width={imageWidth} />
+              {typeof window !== 'undefined' && ( // Only render Image on the client-side
+                <Image src={logo} alt='TXAI Digital' height={imageHeight} width={imageWidth} />
+              )}
               <p hidden={windowWidth < 768} className={div4}>Consultoria</p>
             </div>
           </div>
