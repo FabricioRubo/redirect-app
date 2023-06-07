@@ -1,6 +1,5 @@
 "use client"
 import Image from 'next/image'
-import dynamic from 'next/dynamic';
 import logo from '../assets/logo-txai.png'
 import InputForm from '@/components/inputForm'
 import ConclusionForm from '@/components/conclusionForm'
