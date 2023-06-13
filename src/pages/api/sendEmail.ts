@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const mailOptions = {
     from: process.env.MAIL_AUTH_SENDER,
     to: process.env.MAIL_AUTH_RECIPIENTS,
-    subject: 'TESTE - Lead nova chegando!',
+    subject: '[TXAI] Novo Lead | ' + answers[0] + ' preencheu o formulário de qualificação',
     html: `
       <html>
         <head>

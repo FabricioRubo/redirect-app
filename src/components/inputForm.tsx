@@ -25,13 +25,13 @@ const InputForm: NextPage<Props> = (props) => {
 
     const ProgressBar = ( progressPercentage:number) => {
         const progressBarClass = () => {
-            return isMobileFlag ? 'mt-6 h-5 w-full bg-[#F19552]' : 'mt-6 h-5 w-1/2 bg-[#F19552]'
+            return isMobileFlag ? 'mt-6 h-5 w-full bg-[#5DE0E6]' : 'mt-6 h-5 w-1/2 bg-[#5DE0E6]'
         }
         return (
             <div className={progressBarClass()}>
                 <div
                     style={{ width: `${progressPercentage}%`}}
-                    className={`h-full ${progressPercentage < 50 ? 'bg-[#D9402B]' : 'bg-[#45A3A8]'}`}>
+                    className={`h-full ${progressPercentage < 50 ? 'bg-[#004AAD]' : 'bg-[#004AAD]'}`}>
                 </div>
             </div>
         );
@@ -92,7 +92,10 @@ const InputForm: NextPage<Props> = (props) => {
     }
     const questionEditor = () => {
         const questionEditorClass = () => {
-            return isMobileFlag ? "font-montserrat text-xl text-[#D9402B] text-justify" : "font-montserrat text-2xl text-[#D9402B] text-justify"
+            return isMobileFlag ? 
+                "font-montserrat text-xl text-[#004AAD] text-justify" 
+                : 
+                "font-montserrat text-2xl text-[#004AAD] text-justify"
         }
         return currentQuestion == 1 ? 
                 (
@@ -115,9 +118,9 @@ const InputForm: NextPage<Props> = (props) => {
     const inputRenderer = () => {
         const inputRendererClass = () => {
             return isMobileFlag ? 
-            "w-full pt-2 font-medium font-montserrat text-xl bg-transparent border-b-2 border-[#D9402B] text-[#000000c0] leading-tight focus:outline-none placeholder-[#5d202547]" 
+            "w-full pt-2 font-medium font-montserrat text-xl bg-transparent border-b-2 border-[#004AAD] text-[#000000c0] leading-tight focus:outline-none placeholder-[#5d202547]" 
             : 
-            "w-full pt-1 font-montserrat text-2xl bg-transparent border-b-2 border-[#D9402B] text-[#000000c0] leading-tight focus:outline-none placeholder-[#5d202547]" 
+            "w-full pt-1 font-montserrat text-2xl bg-transparent border-b-2 border-[#004AAD] text-[#000000c0] leading-tight focus:outline-none placeholder-[#5d202547]" 
         }
         return questionObj[currentQuestion].isSelect ? (<></>) : (
             <input className={inputRendererClass()} 
@@ -132,15 +135,15 @@ const InputForm: NextPage<Props> = (props) => {
     const buttonSelectEditor = () => {
         const buttonSelectEditorClass = () => {
             return isMobileFlag? 
-            "bg-transparent hover:bg-[#D9402B] text-sm text-[#D9402B] font-montserrat font-bold hover:text-white my-1 py-2 px-2 border border-[#D9402B] hover:border-transparent rounded w-full"
+            "bg-transparent hover:bg-[#004AAD] text-sm text-[#004AAD] font-montserrat font-bold hover:text-white my-1 py-2 px-2 border border-[#004AAD] hover:border-transparent rounded w-full"
             :
-            "bg-transparent hover:bg-[#D9402B] text-lg text-[#D9402B] font-montserrat font-bold hover:text-white my-1 py-3 px-2 border border-[#D9402B] hover:border-transparent rounded w-1/2"
+            "bg-transparent hover:bg-[#004AAD] text-lg text-[#004AAD] font-montserrat font-bold hover:text-white my-1 py-3 px-2 border border-[#004AAD] hover:border-transparent rounded w-1/2"
         }
         const buttonEditorClass = () => {
             return isMobileFlag? 
-            "bg-transparent text-[#D9402B] font-montserrat font-bold my-1 py-2 px-2 border border-[#D9402B] rounded w-full " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")
+            "bg-transparent text-[#004AAD] font-montserrat font-bold my-1 py-2 px-2 border border-[#004AAD] rounded w-full " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#004AAD] hover:text-white hover:border-transparent")
             :
-            "bg-transparent text-[#D9402B] font-montserrat font-bold my-1 py-2 px-2 border border-[#D9402B] rounded w-1/2 " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#D9402B] hover:text-white hover:border-transparent")
+            "bg-transparent text-[#004AAD] font-montserrat font-bold my-1 py-2 px-2 border border-[#004AAD] rounded w-1/2 " + (emptyInput ? "opacity-50 cursor-not-allowed" : "hover:bg-[#004AAD] hover:text-white hover:border-transparent")
         }
         if(questionObj[currentQuestion].isSelect) {
             return questionObj[currentQuestion].choices.map((choiceText:string) => {
@@ -161,7 +164,7 @@ const InputForm: NextPage<Props> = (props) => {
         if (questionObj[currentQuestion].description) {
             return (
                 <div className="w-full bg-transparent">
-                    <p className="font-montserrat text-base font-bold text-[#d93f2ba4]">{questionObj[currentQuestion].description}</p>
+                    <p className="font-montserrat text-base font-bold text-[#5DE0E6A4]">{questionObj[currentQuestion].description}</p>
                 </div>
             )
         }
