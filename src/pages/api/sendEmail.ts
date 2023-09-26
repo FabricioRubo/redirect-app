@@ -17,13 +17,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const transporter = nodemailer.createTransport(smtpTransport({
     host: process.env.MAIL_AUTH_HOST,
-    port: 465,
-    secure: true,
+    port: Number(process.env.MAIL_AUTH_PORT),
+    secure: Boolean(process.env.MAIL_AUTH_SECURE),
     auth: {
       user: process.env.MAIL_AUTH_USER,
       pass: process.env.MAIL_AUTH_PASS,
     },
-  
   }));
 
   const mailOptions = {

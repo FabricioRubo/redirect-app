@@ -25,7 +25,7 @@ const InputForm: NextPage<Props> = (props) => {
 
     const ProgressBar = ( progressPercentage:number) => {
         const progressBarClass = () => {
-            return isMobileFlag ? 'mt-6 h-5 w-full bg-[#5DE0E6]' : 'mt-6 h-5 w-1/2 bg-[#5DE0E6]'
+            return isMobileFlag ? 'mt-6 h-5 w-full bg-[#919ab1]' : 'mt-6 h-5 w-1/2 bg-[#919ab1]'
         }
         return (
             <div className={progressBarClass()}>
@@ -97,10 +97,10 @@ const InputForm: NextPage<Props> = (props) => {
                 : 
                 "font-montserrat text-2xl text-[#004AAD] text-justify"
         }
-        return currentQuestion == 1 ? 
+        return questionObj[currentQuestion].namePrefix ? 
                 (
                     <div className={questionEditorClass()}>
-                        {(currentQuestion+1) + ". " + answers[0] +", " + questionObj[currentQuestion].quest};
+                        {(currentQuestion+1) + ". " + answers[0] +", " + questionObj[currentQuestion].quest}
                     </div>
                 ) 
                 :
@@ -169,6 +169,7 @@ const InputForm: NextPage<Props> = (props) => {
             )
         }
     }
+
     return (
         <div id="input-container" className="w-9/12">
             {questionEditor()}

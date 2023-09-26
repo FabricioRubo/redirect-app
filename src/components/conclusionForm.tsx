@@ -44,7 +44,7 @@ const ConclusionForm: NextPage<Props> = (props) => {
             if (response.ok) {
                 console.log('Email sent successfully');
             } else {
-                console.error('Failed to send email');
+                console.error('Failed to send email: ', response);
             }
         } catch (error) {
             console.error('Error sending email:', error);
@@ -74,7 +74,7 @@ const ConclusionForm: NextPage<Props> = (props) => {
     }
     const redirectToURL = () => {
         if (typeof window !== 'undefined') {
-            window.location.href = 'https://wa.link/n4b120';
+            window.location.href = 'https://wa.link/9j5v3v' ;
         }
     };
 

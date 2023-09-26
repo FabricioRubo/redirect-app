@@ -89,9 +89,10 @@ const Home = () => {
         <link rel="icon" href='../assets/logo_blank.png' type="image/png"/>
       </Head>
       <div id='b' className={div0}>
-        <div id='c' className={`${div1} relative`}>
+        <div id='c' className={`${div1} rounded-r-2xl relative`}>
           {typeof window !== 'undefined' && (
             <Image
+            className='rounded-r-2xl'
               src={bg_background_image}
               alt='Background Image'
               layout='fill'
@@ -99,7 +100,7 @@ const Home = () => {
               quality={100}
             />
           )}
-          <div className='absolute inset-0 bg-gradient-to-r from-[#5DE0E6] to-[#004AAD] opacity-80'></div>
+          <div className='rounded-r-2xl absolute inset-0 bg-gradient-to-r from-[#5DE0E6] to-[#004AAD] opacity-80'></div>
           <div id='d' className={div2}>
             <div id='e' className={`${div3} relative z-10`}>
               {typeof window !== 'undefined' && (

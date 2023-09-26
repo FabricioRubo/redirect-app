@@ -5,6 +5,7 @@ export interface QuestionForm {
     type: string;
     isSelect: boolean;
     choices: string[];
+    namePrefix: boolean;
 }
 
 export interface EmailFormData {
