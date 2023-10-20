@@ -4,17 +4,15 @@ import { EmailFormData, QuestionForm } from "@/types/interfaces"
 import smtpTransport  from 'nodemailer-smtp-transport';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  let HTMLtext = "";
   const { questions, answers } = req.body as EmailFormData;
-  let HTMLtext = ""
-
+  
   const mailContentBuilder = (questions:QuestionForm[], answers:string[]) => {
     questions.map((question:QuestionForm, index) => {
-      HTMLtext = HTMLtext +"<div><h4>" + (index+1).toString() + ". " + question.quest.toString() + "</h4><h3>" + answers[index].toString() + "</h3><hr></div>"
+      HTMLtext = HTMLtext +"<div><h4>" + (index+1).toString() + ". " + question.quest.toString() + "</h4><h3>" + answers[index].toString() + "</h3><hr></div>";
     })
   }
-
-  mailContentBuilder(questions, answers)
-
+  mailContentBuilder(questions, answers);
   const transporter = nodemailer.createTransport(smtpTransport({
     host: process.env.MAIL_AUTH_HOST,
     port: Number(process.env.MAIL_AUTH_PORT),
@@ -98,7 +96,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       </html>
     `,
   };
-
   try {
     await transporter.sendMail(mailOptions);
     res.status(200).json({ message: 'Email sent successfully' });
